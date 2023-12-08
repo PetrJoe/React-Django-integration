@@ -8,9 +8,14 @@ import sys
 def main():
     """Run administrative tasks."""
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    
     # Assuming your ReactJS project is in the 'frontend' directory inside your Django project
     react_project_directory = os.path.join(BASE_DIR, 'frontend')
-    
+
+    # Run npm install inside the frontend directory
+    subprocess.run(['npm', 'install'], cwd=react_project_directory, check=True)
+
+    # Run npm run build after npm install
     subprocess.run(['npm', 'run', 'build'], cwd=react_project_directory, check=True)
 
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings')
